@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  color: #222;
+  background: #fff;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+  color: white;
+  padding: 90px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cta {
+  background: #00c853;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+/* GRID SECTIONS */
+.grid-section {
+  padding: 70px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.grid-section.dark {
+  background: #f8f9fa;
+}
+
+.grid-section.principles {
+  background: white;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.grid-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.grid-card {
+  padding: 25px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.grid-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+}
+
+/* SHOWCASE */
+.showcase {
+  padding: 80px 20px;
+  background: #111;
+  color: white;
+}
+
+.showcase h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.showcase-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+}
+
+.video-box video {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.image-grid img {
+  width: 100%;
+  border-radius: 14px;
+  transition: transform 0.3s;
+}
+
+.image-grid img:hover {
+  transform: scale(1.05);
+}
+
+.info-box {
+  background: #f5ecec;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.instructions{
+  background: #ffffff;
+  padding: 70px 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+.instructions-list {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.instructions-list li {
+  margin: 12px 0;
+  font-size: 18px;
+}
+
+.note-grid {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+/* PRICING */
+.pricing {
+  padding: 80px 20px;
+  background: #484364;
+  text-align: center;
+}
+
+.price-card {
+  background: white;
+  max-width: 400px;
+  margin: auto;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  transform: scale(1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.price-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 35px 80px rgba(0,0,0,0.25);
+}
+
+.price {
+  font-size: 42px;
+  margin: 20px 0;
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.price-card li {
+  margin: 10px 0;
+}
+
+/* FOOTER */
+footer {
+  padding: 25px;
+  text-align: center;
+  background: #fdfcfc;
+}
+

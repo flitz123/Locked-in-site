@@ -1,0 +1,11 @@
+<h1>Download Focus App</h1>
+<p>Click below to download your app.</p>
+<a id="download-link" href="#">Download</a>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get('order');
+  if (orderId) {
+    document.getElementById('download-link').href = `/download?order=${orderId}`;
+  }
+</script>
