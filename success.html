@@ -1,11 +1,28 @@
 <h1>Payment Successful 🎉</h1>
 <p>Your download is now unlocked.</p>
-<a id="download-link" href="#">Download App</a>
+<a id="download-link" href="#" onclick="verifyPayment()">Download App</a>
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const orderId = urlParams.get('order');
-  if (orderId) {
-    document.getElementById('download-link').href = `/verify?order=${orderId}`;
+
+  async function verifyPayment() {
+    if (!orderId) {
+      alert('Order ID missing');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/verify?order=${orderId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        window.location.href = `/download.html?order=${orderId}`;
+      } else {
+        alert('Payment verification failed: ' + data.error);
+      }
+    } catch (error) {
+      alert('Verification error: ' + error.message);
+    }
   }
 </script>

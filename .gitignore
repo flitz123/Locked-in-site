@@ -2,3 +2,7 @@
 service-account.json
 node_modules/
 .qodo/
+.vercel
+.env*.local
+service-account-base64.txt
+service-account-base64-new.txt

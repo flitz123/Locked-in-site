@@ -1,11 +1,37 @@
 <h1>Download Focus App</h1>
 <p>Click below to download your app.</p>
-<a id="download-link" href="#">Download</a>
+<button id="download-btn" onclick="downloadFile()">Download</button>
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const orderId = urlParams.get('order');
-  if (orderId) {
-    document.getElementById('download-link').href = `/download?order=${orderId}`;
+
+  async function downloadFile() {
+    if (!orderId) {
+      alert('Order ID missing');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/download?order=${orderId}`);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert('Download failed: ' + errorData.error);
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'FocusApp.exe';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      alert('Download error: ' + error.message);
+    }
   }
 </script>
