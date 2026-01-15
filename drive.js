@@ -41,4 +41,6 @@ async function streamFile(fileId, res) {
   file.data.pipe(res);
 }
 
+const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+
 module.exports = { streamFile };

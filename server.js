@@ -1,21 +1,26 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
+const { streamFile } = require('./download');
 
 const app = express();
-app.use(bodyParser.json());
-app.use(express.static(__dirname));
+const FILE_ID = "1PPu0v14klUJU8SxQ95yKCDcf3BOxFyyM";
 
-// API routes for serverless compatibility
-const verifyHandler = require('./api/verify');
-const downloadHandler = require('./api/download');
+app.get('/download', async (req, res) => {
+  const { order } = req.query;
 
-app.get('/api/verify', verifyHandler);
-app.get('/api/download', downloadHandler);
+  if (!order) {
+    return res.status(403).send("Missing order ID");
+  }
 
-const PORT = process.env.PORT || 3000;
+  // TODO: verify PayPal order + expiry
+  res.setHeader(
+    "Content-Disposition",
+    "attachment; filename=FocusApp.exe"
+  );
 
-app.listen(PORT, () => console.log(`Secure download server running on port ${PORT}`));
+  await streamFile(FILE_ID, res);
+});
 
-// Export for deployment platforms that require it
-module.exports = app;
+app.listen(3000, () =>
+  console.log("Secure download running on port 3000")
+);
