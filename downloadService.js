@@ -1,6 +1,6 @@
-const drive = require('./googleAuth');
+import drive from './googleAuth.js';
 
-async function streamFile(fileId, res) {
+export async function streamFile(fileId, res) {
   const response = await drive.files.get(
     { fileId, alt: 'media' },
     { responseType: 'stream' }
@@ -8,5 +8,3 @@ async function streamFile(fileId, res) {
 
   response.data.pipe(res);
 }
-
-module.exports = { streamFile };

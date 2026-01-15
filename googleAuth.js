@@ -1,23 +1,14 @@
-require('dotenv').config();
-const { google } = require('googleapis');
-
-if (!process.env.GOOGLE_SERVICE_ACCOUNT) {
-  throw new Error("GOOGLE_SERVICE_ACCOUNT env variable not set");
-}
+import { google } from 'googleapis';
 
 const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
-
-// 🔑 CRITICAL FIX: restore newlines in private key
-serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+serviceAccount.private_key =
+  serviceAccount.private_key.replace(/\\n/g, '\n');
 
 const auth = new google.auth.GoogleAuth({
   credentials: serviceAccount,
-  scopes: ['https://www.googleapis.com/auth/drive.readonly']
+  scopes: ['https://www.googleapis.com/auth/drive']
 });
 
-const drive = google.drive({
-  version: 'v3',
-  auth
-});
+const drive = google.drive({ version: 'v3', auth });
+export default drive;
 
-module.exports = drive;

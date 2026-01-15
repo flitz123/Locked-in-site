@@ -1,36 +1,29 @@
-const { streamFile } = require('../drive');
+import { createTempAccess, revokeAccess } from '../../driveAccess.js';
 
-const FILE_ID = "1Hzw0_1Th_qcGjF7N1xxtCkL8vt5iTjwE";
+const FILE_ID = process.env.GOOGLE_DRIVE_FILE_ID;
 
-// Mock DB check (replace with real DB)
-function isAccessValid(orderId) {
-  // Example logic
-  const record = {
-    expiresAt: new Date(Date.now() + 60 * 60 * 1000) // 1 hour
-  };
-
-  return new Date() < new Date(record.expiresAt);
-}
-
-module.exports = async (req, res) => {
-  const { order } = req.query;
-
-  if (!order) {
-    return res.status(400).json({ error: "Missing order ID" });
-  }
-
-  if (!isAccessValid(order)) {
-    return res.status(403).json({ error: "Download link expired" });
-  }
-
-  res.setHeader(
-    "Content-Disposition",
-    "attachment; filename=FocusApp.exe"
-  );
-
+export default async function handler(req, res) {
   try {
-    await streamFile(FILE_ID, res);
-  } catch (error) {
-    res.status(500).json({ error: "Download failed" });
+    const { order } = req.query;
+
+    if (!order) {
+      return res.status(403).send("Missing order ID");
+    }
+
+    // TODO: verify PayPal order here
+
+    const { link, permissionId } = await createTempAccess(FILE_ID);
+
+    // Revoke access after 5 minutes
+    setTimeout(() => {
+      revokeAccess(FILE_ID, permissionId)
+        .catch(err => console.error("Revoke failed", err));
+    }, 5 * 60 * 1000);
+
+    return res.redirect(link);
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Failed to generate download");
   }
-};
+}
