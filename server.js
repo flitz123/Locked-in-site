@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { streamFile } = require('./download');
+const { streamFile } = require('./downloadService.js');
 
 const app = express();
 const FILE_ID = "1PPu0v14klUJU8SxQ95yKCDcf3BOxFyyM";
