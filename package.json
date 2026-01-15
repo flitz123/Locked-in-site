@@ -17,6 +17,6 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "fs": "^0.0.1-security",
-    "googleapis": "^169.0.0"
+    "googleapis": "^170.0.0"
   }
 }
