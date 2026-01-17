@@ -1,14 +1,34 @@
-paypal.Buttons({
-  createOrder: function (data, actions) {
-    return actions.order.create({
-      purchase_units: [{
-        amount: { value: '15.00' }
-      }]
-    });
-  },
-  onApprove: function (data, actions) {
-    return actions.order.capture().then(function (details) {
-      window.location.href = `/success.html?order=${data.orderID}`;
-    });
-  }
-}).render('#paypal-button-container');
+const PAYPAL_API =
+  process.env.PAYPAL_ENV === 'live'
+    ? 'https://api-m.paypal.com'
+    : 'https://api-m.sandbox.paypal.com';
+
+export async function getAccessToken() {
+  const auth = Buffer.from(
+    `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
+  ).toString('base64');
+
+  const res = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${auth}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'grant_type=client_credentials'
+  });
+
+  const data = await res.json();
+  return data.access_token;
+}
+
+export async function verifyOrder(orderId) {
+  const token = await getAccessToken();
+
+  const res = await fetch(`${PAYPAL_API}/v2/checkout/orders/${orderId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return res.json();
+}
