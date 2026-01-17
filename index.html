@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <title>Focus App – Block Distractions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <link rel="stylesheet" href="style.css" />
+
+  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AUaC7T5ATBg6qcKzXu-uuhL9cg1qwwTurhO3pJGQ36sxv1rEyC8Mex4y7bXXhoLSePe7nmatzwv-4Oyn&currency=USD"></script>
 </head>
 <body>
@@ -41,12 +44,12 @@
 <!-- PRINCIPLES -->
 <section class="grid-section principles">
   <h2>Built on Proven Productivity Principles</h2>
-  <p>The app doesn’t just block apps — it builds better habits🧠💯.</p>
-  <div  class="grid">
+  <p>The app doesn’t just block apps — it builds better habits 🧠💯</p>
+  <div class="grid">
     <div class="grid-card">Single-tasking</div>
-    <div class="grid-card">Digital minimalism</div> 
-    <div class="grid-card">Deep work</div> 
-    <div class="grid-card">Healthy screen usage.</div> 
+    <div class="grid-card">Digital minimalism</div>
+    <div class="grid-card">Deep work</div>
+    <div class="grid-card">Healthy screen usage</div>
   </div>
 </section>
 
@@ -55,7 +58,6 @@
   <h2>See the App in Action</h2>
 
   <div class="showcase-grid">
-    <!-- Video -->
     <div class="video-box">
       <video controls>
         <source src="assets/Demo.mp4" type="video/mp4" />
@@ -63,7 +65,6 @@
       </video>
     </div>
 
-    <!-- Images -->
     <div class="image-grid">
       <img src="assets/Screenshot1.png" alt="App Screenshot 1" />
       <img src="assets/Screenshot2.png" alt="App Screenshot 2" />
@@ -72,44 +73,43 @@
   </div>
 </section>
 
-<section class="info-box">
 <!-- INSTRUCTIONS -->
-<div class="instructions">
-  <h2>How to Use Focus App</h2>
-
+<section class="info-box">
+  <div class="instructions">
+    <h2>How to Use Focus App</h2>
     <ul class="instructions-list">
-      <li>Download and install the Focus App from the link below.</li>
-      <li>Add your favorite apps to the Allowed and Selected sections to use them during the session. Add your distractions to the Blocked section to block them.</li>
-      <li>Then track and monitor your focused work sessions. Lock your PC to focus mode.</li>
-      <li>Start working and stay productive!</li>
+      <li>Download and install the Focus App after purchase.</li>
+      <li>Select allowed apps and block distractions.</li>
+      <li>Choose a focus mode and lock in.</li>
+      <li>Work distraction-free.</li>
     </ul>
-      <h2>NOTE</h2>
-      <p>No apps are blocked during Lenient and Moderate modes. In Strict mode, all apps are blocked.
-        Some apps may not be blocked due to system restrictions and forcing them overloads your CPU.
-      </p>
-      <p>
-        The app has both an installable(Locked-In Focus Setup 1.0.0) and a portable version. 
-        The portable version does not require installation and can be run directly after downloading on any machines, including USBs without loosing functionality.
-      </p>
-      <p>
-        For a the best experience using the app, try Strict mode.
-      </p>
-    </div>
+
+    <h2>Note</h2>
+    <p>
+      Strict mode blocks all non-approved apps.  
+      Some system apps may not be blockable due to OS restrictions.
+    </p>
+    <p>
+      Includes both installable and portable versions.
+    </p>
+  </div>
 </section>
 
 <!-- PRICING -->
 <section id="pricing" class="pricing">
   <h2>Simple One-Time Purchase</h2>
 
-  <div class="price-card">
+  <div class="price-card pulse">
     <h3>Focus App (Windows / PC)</h3>
     <p class="price">$15</p>
-    <ul>
-      <li>✔ Lifetime access</li>
-      <li>✔ Free updates</li>
-      <li>✔ Secure download</li>
-    </ul>
+
+    <p>
+      <br>✔ Lifetime access</br>
+      <br>✔ Free updates</br>
+      <br>✔ Secure one-time download</br>
+    </p>
     <div id="paypal-button-container"></div>
+    <p id="payment-status" class="payment-status"></p>
   </div>
 </section>
 
@@ -117,6 +117,29 @@
   <p>© 2026 Focus App. All rights reserved.</p>
 </footer>
 
-<script src="paypal.js"></script>
+<!-- PAYPAL LOGIC -->
+<script>
+  const statusText = document.getElementById("payment-status");
+
+  paypal.Buttons({
+    createOrder: (data, actions) => {
+      statusText.textContent = "Preparing secure checkout…";
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '15.00' }
+        }]
+      });
+    },
+    onApprove: (data) => {
+      statusText.textContent = "Payment confirmed. Preparing download…";
+      window.location.href = `/api/download?order=${data.orderID}`;
+    },
+    onError: () => {
+      statusText.textContent = "Payment failed. Please try again.";
+    }
+  }).render('#paypal-button-container');
+</script>
+
 </body>
 </html>
+

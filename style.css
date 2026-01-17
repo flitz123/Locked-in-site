@@ -15,7 +15,6 @@ body {
   color: white;
   padding: 90px 20px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .cta {
@@ -41,14 +40,7 @@ body {
 }
 
 .grid-section.principles {
-  background: white;
   text-align: center;
-  margin-bottom: 30px;
-}
-
-.grid-section h2 {
-  text-align: center;
-  margin-bottom: 40px;
 }
 
 .grid {
@@ -67,8 +59,8 @@ body {
 }
 
 .grid-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
 }
 
 /* SHOWCASE */
@@ -76,11 +68,6 @@ body {
   padding: 80px 20px;
   background: #111;
   color: white;
-}
-
-.showcase h2 {
-  text-align: center;
-  margin-bottom: 40px;
 }
 
 .showcase-grid {
@@ -94,13 +81,6 @@ body {
 .video-box video {
   width: 100%;
   border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-}
-
-.image-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
 }
 
 .image-grid img {
@@ -110,41 +90,20 @@ body {
 }
 
 .image-grid img:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
+/* INFO */
 .info-box {
   background: #f5ecec;
-  padding: 25px;
-  border-radius: 10px;
-  text-align: center;
+  padding: 30px;
 }
 
-.instructions{
-  background: #ffffff;
-  padding: 70px 20px;
+.instructions {
   max-width: 800px;
   margin: auto;
-  text-align: left;
 }
 
-.instructions-list {
-  text-align: left;
-  margin-top: 30px;
-}
-
-.instructions-list li {
-  margin: 12px 0;
-  font-size: 18px;
-}
-
-.note-grid {
-  background: #ffffff;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 20px;
-  text-align: center;
-}
 /* PRICING */
 .pricing {
   padding: 80px 20px;
@@ -154,33 +113,35 @@ body {
 
 .price-card {
   background: white;
-  max-width: 400px;
+  max-width: 420px;
   margin: auto;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-  transform: scale(1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 45px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
 }
 
 .price-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 35px 80px rgba(0,0,0,0.25);
+  transform: scale(1.06);
+}
+
+.pulse {
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 0 40px rgba(0,200,83,0.4); }
+  100% { box-shadow: 0 0 0 rgba(0,0,0,0.2); }
 }
 
 .price {
-  font-size: 42px;
-  margin: 20px 0;
+  font-size: 44px;
 }
 
-.price-card ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-.price-card li {
-  margin: 10px 0;
+.payment-status {
+  margin-top: 15px;
+  font-weight: bold;
 }
 
 /* FOOTER */
