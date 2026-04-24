@@ -1,0 +1,24 @@
+This application is committed to protecting your privacy. This app does not collect, store, process, or share any personal data from its users.
+
+Data Collection
+This application does not collect any personally identifiable information (PII) or non-personal data. Specifically:
+
+No names, email addresses, or contact details are collected
+No device information or identifiers are gathered
+No usage analytics or tracking data is recorded
+No location data is accessed
+Data Storage
+
+This application does not store any user data on external servers or cloud systems. Any data generated during use remains locally on your device and is not transmitted.
+
+Third-Party Services
+This application does not use third-party services that collect, process, or store user data.
+
+Permissions
+The application does not request or require any sensitive system permissions that would allow access to personal data.
+
+Children’s Privacy
+This application does not collect any data from users, including children under the age of 13.
+
+Security
+Since no data is collected or transmitted, there is no risk of personal data exposure through this application.
